@@ -6,6 +6,7 @@ import { likedPokemonAtom } from "../../atoms/likedPokemonAtom";
 import Image from "next/image"; // If you're using Next.js Image component
 import Link from "next/link";
 import VerticalNavBar from "@/app/components/verticalnavbar";
+import HorizontalNavBar from "@/app/components/HorizontalNavBar";
 
 // Update the Pokemon type to include the sprites field
 type Pokemon = {
@@ -75,58 +76,74 @@ export default function PokemonDetailPage({
   }
 
   return (
-    <div className="bg-pokedexBG max-w-full h-[100dvh] container mx-auto flex items-center justify-center">
-      <div className="w-1/5">
-        <VerticalNavBar />
-      </div>
-      <div className="w-4/5  flex flex-row m-20 rounded p-4 items-center justify-center">
-        <span className="bg-cardBG border-2 border-pokeBorder p-10 rounded-lg">
-          <div className="flex flex-row-reverse items-start justify-start">
-            {pokemon?.sprites.front_default && (
-              <Image
-                src={pokemon.sprites.front_default}
-                alt={pokemon.name}
-                width={200}
-                height={200}
-              />
-            )}
-            <div className="flex flex-col items-start text-start">
-              <Link href="/">
-                <button className="px-4 py-2 border-pokeBody border-2 rounded">
-                  &lt;
-                </button>
-              </Link>
-              <br />
-              <h1 className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody  uppercase font-bold mb-4 text-2xl">
-                {pokemon?.name}{isLiked ? "♥" : ""}
-              </h1>
-              <p className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-50">No. {pokemon?.id}</p>
-              <p className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-50 uppercase">
-                Types: {pokemon?.types.map((type) => type.type.name).join(", ")}
-              </p>
+    <div className="w-full flex flex-col md:flex-row h-[100dvh] items-center">
+      <div className="bg-cardBG md:bg-pokedexBG max-w-full w-full container mx-auto flex  flex-col md:flex-row items-center justify-center">
+        <div className="md:w-1/5 md:block hidden">
+          <VerticalNavBar />
+        </div>
+        <div className="h-fit md:hidden block w-full">
+          <HorizontalNavBar />
+        </div>
+        <div className="w-4/5  flex flex-row m-5 md:m-20 rounded p-4 items-center justify-center">
+          <span className="bg-cardBG md:border-2 md:border-pokeBorder md:p-10 rounded-lg">
+            <div className="flex flex-col md:flex-row-reverse md:items-start justify-start">
+              {pokemon?.sprites.front_default && (
+                <Image
+                  src={pokemon.sprites.front_default}
+                  alt={pokemon.name}
+                  width={200}
+                  height={200}
+                />
+              )}
+              <div className="text-center md:text-start flex flex-col md:items-start items-center">
+                <Link href="/">
+                  <button className="hidden md:block px-4 py-2 border-pokeBody border-2 rounded">
+                    &lt;
+                  </button>
+                </Link>
+                <br />
+                <h1 className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody  uppercase font-bold mb-4 text-2xl">
+                  {pokemon?.name}
+                  {isLiked ? "♥" : ""}
+                </h1>
+                <p className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-50">
+                  No. {pokemon?.id}
+                </p>
+                <p className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-50 uppercase">
+                  Types:{" "}
+                  {pokemon?.types.map((type) => type.type.name).join(", ")}
+                </p>
+              </div>
             </div>
-          </div>
-          <h2 className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-xl font-bold mt-4 uppercase">Stats</h2>
-          <ul className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody uppercase  gap-4 text-opacity-50">
-            {pokemon?.stats.map((stat) => (
-              <li key={stat.stat.name}>
-                {stat.stat.name}: {stat.base_stat}
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-col gap-4">
-            <button
-              className={`mt-4 px-4 py-2 rounded ${
-                isLiked
-                  ? "border-2 border-red-300 text-red-300"
-                  : "border-2 border-pokeBody"
-              } text-pokeBody`}
-              onClick={toggleLike}
-            >
-              {isLiked ? "Unlike this pokemon" : "Like this pokemon ♥"}
-            </button>
-          </div>
-        </span>
+            <h2 className="text-center md:text-start drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-xl font-bold mt-4 uppercase">
+              Stats
+            </h2>
+            <ul className="text-center md:text-start drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody uppercase  gap-4 text-opacity-50">
+              {pokemon?.stats.map((stat) => (
+                <li key={stat.stat.name}>
+                  {stat.stat.name}: {stat.base_stat}
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col gap-4 items-center">
+              <button
+                className={`mt-4 px-4 py-2 rounded w-full ${
+                  isLiked
+                    ? "border-2 border-red-300 text-red-300"
+                    : "border-2 border-pokeBody"
+                } text-pokeBody`}
+                onClick={toggleLike}
+              >
+                {isLiked ? "Unlike this pokemon" : "Like this pokemon ♥"}
+              </button>
+              <Link href="/">
+                  <button className="block md:hidden px-4 py-2 border-pokeBody border-2 rounded">
+                    &lt;
+                  </button>
+                </Link>
+            </div>
+          </span>
+        </div>
       </div>
     </div>
   );

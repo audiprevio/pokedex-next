@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { likedPokemonAtom } from "../../atoms/likedPokemonAtom";
 import Image from "next/image"; // If you're using Next.js Image component
 import Link from "next/link";
+import VerticalNavBar from "@/app/components/verticalnavbar";
 
 // Update the Pokemon type to include the sprites field
 type Pokemon = {
@@ -58,8 +59,13 @@ export default function PokemonDetailPage({
 
   if (isLoading) {
     return (
-      <div className="bg-poketitleBG h-[100dvh] flex justify-center items-center py-20r">
-        Loading pokemon data...
+      <div>
+        <div className="w-1/5">
+          <VerticalNavBar />
+        </div>
+        <div className="w-4/5 bg-pokedexBG h-[100dvh] flex justify-center items-center py-20">
+          Loading pokemon data...
+        </div>
       </div>
     );
   }
@@ -69,28 +75,39 @@ export default function PokemonDetailPage({
   }
 
   return (
-    <div className="bg-poketitleBG max-w-full h-[100dvh] container mx-auto flex items-center justify-center">
-      <div className="bg-white flex flex-row border-2 w-fit pr-20 border-pokeBorder my-20 shadow rounded p-4  items-center">
-        {/* Display the sprite image */}
-        <span>
-          {pokemon?.sprites.front_default && (
-            <Image
-              src={pokemon.sprites.front_default}
-              alt={pokemon.name}
-              width={120}
-              height={120}
-            />
-          )}
-          <h1 className="text-3xl font-bold mb-4 capitalize">
-            {pokemon?.name}
-          </h1>
-
-          <p className="text-pokeBody text-opacity-75">ID: {pokemon?.id}</p>
-          <p className="text-pokeBody text-opacity-75">
-            Types: {pokemon?.types.map((type) => type.type.name).join(", ")}
-          </p>
-          <h2 className="text-xl font-bold mt-4">Stats</h2>
-          <ul className="text-pokeBody text-opacity-75">
+    <div className="bg-pokedexBG max-w-full h-[100dvh] container mx-auto flex items-center justify-center">
+      <div className="w-1/5">
+        <VerticalNavBar />
+      </div>
+      <div className="w-4/5  flex flex-row m-20 rounded p-4 items-center justify-center">
+        <span className="bg-cardBG border-2 border-pokeBorder p-10 rounded-lg">
+          <div className="flex flex-row-reverse items-start justify-start">
+            {pokemon?.sprites.front_default && (
+              <Image
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                width={200}
+                height={200}
+              />
+            )}
+            <div className="flex flex-col items-start text-start">
+              <Link href="/">
+                <button className="px-4 py-2 border-pokeBody border-2 rounded">
+                  &lt;
+                </button>
+              </Link>
+              <br />
+              <h1 className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody  uppercase font-bold mb-4 text-2xl">
+                {pokemon?.name}{isLiked ? "♥" : ""}
+              </h1>
+              <p className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-50">No. {pokemon?.id}</p>
+              <p className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-50 uppercase">
+                Types: {pokemon?.types.map((type) => type.type.name).join(", ")}
+              </p>
+            </div>
+          </div>
+          <h2 className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-xl font-bold mt-4 uppercase">Stats</h2>
+          <ul className="drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody uppercase  gap-4 text-opacity-50">
             {pokemon?.stats.map((stat) => (
               <li key={stat.stat.name}>
                 {stat.stat.name}: {stat.base_stat}
@@ -98,26 +115,16 @@ export default function PokemonDetailPage({
             ))}
           </ul>
           <div className="flex flex-col gap-4">
-          <button
-            className={`mt-4 px-4 py-2 rounded ${
-              isLiked
-                ? "bg-red-500 hover:bg-red-600"
-                : "bg-poketitleBG hover:bg-poketitleBG"
-            } text-pokeBody`}
-            onClick={toggleLike}
-          >
-            {isLiked ? "Unlike this pokemon" : "Like this pokemon"}
-          </button>
-          <Link href="/">
-            <button className="border-pokeBody border-2 px-2 text-sm py-2 rounded-lg">
-                See other pokemons
+            <button
+              className={`mt-4 px-4 py-2 rounded ${
+                isLiked
+                  ? "border-2 border-red-300 text-red-300"
+                  : "border-2 border-pokeBody"
+              } text-pokeBody`}
+              onClick={toggleLike}
+            >
+              {isLiked ? "Unlike this pokemon" : "Like this pokemon ♥"}
             </button>
-          </Link>
-          <Link href="/liked-pokemon">
-            <button className="underline  px-2 text-sm py-2 rounded-lg">
-                See all liked pokemons
-            </button>
-          </Link>
           </div>
         </span>
       </div>

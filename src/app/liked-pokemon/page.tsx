@@ -5,12 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useQuery } from "react-query";
 import { useQueries } from "react-query";
-import VerticalNavBar from "../components/verticalnavbar";
+import VerticalNavBar from "../components/VerticalNavBar";
 import HorizontalNavBar from "../components/HorizontalNavBar";
 
 type Pokemon = {
   id: number;
   name: string;
+  types: { type: { name: string } }[];
   sprites: {
     front_default: string;
   };

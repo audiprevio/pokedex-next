@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import { likedPokemonAtom } from "../../atoms/likedPokemonAtom";
 import Image from "next/image"; // If you're using Next.js Image component
 import Link from "next/link";
-import VerticalNavBar from "@/app/components/verticalnavbar";
+import VerticalNavBar from "@/app/components/VerticalNavBar";
 import HorizontalNavBar from "@/app/components/HorizontalNavBar";
 
 // Update the Pokemon type to include the sprites field

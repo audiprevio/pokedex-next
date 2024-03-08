@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import React from "react";
-import VerticalNavBar from "./components/verticalnavbar";
+import VerticalNavBar from "./components/VerticalNavBar";
 import GetComponent from "./components/maincomponents/pokemonlistscomponent";
 import HorizontalNavBar from "./components/HorizontalNavBar";
 

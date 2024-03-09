@@ -60,8 +60,8 @@ export default function PokemonDetails({ pokemon }: PokemonDetailsProps) {
           <button
             className={`mt-4 px-4 py-2 rounded w-full ${
               isLiked
-                ? "hover:text-pokeBorder border-2 hover:border-pokeBorder drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] border-pokeBody text-pokeBody"
-                : "border-2 hover:text-pokeBorder bg-pokedexBG hover:border-pokeBorder drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] border-pokeBody text-pokeBody"
+                ? "drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)]  text-lg border-pokeBody border-2 py-1 px-2 font-bold text-pokeBody rounded-md"
+                : "drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] bg-cardBG text-lg border-pokeBody border-2 py-1 px-2 font-bold text-pokeBody rounded-md"
             } text-pokeBody`}
             onClick={toggleLike}
           >

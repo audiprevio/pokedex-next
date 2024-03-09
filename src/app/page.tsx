@@ -5,7 +5,7 @@ import AllPokemonList from "./components/AllPokemonList";
 import HorizontalNavBar from "./components/HorizontalNavBar";
 
 export const metadata: Metadata = {
-  title: "Pokedex App",
+  title: "Pokedext",
   description: "NextJS Based Pokedex App",
 };
 

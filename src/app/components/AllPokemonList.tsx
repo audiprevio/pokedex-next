@@ -113,9 +113,9 @@ export default function AllPokemonList() {
         <button
           className={`px-4 py-2 rounded ${
             currentPage === 1
-            ? "bg-gray-300 cursor-not-allowed drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-35 border-gray-300 border-2"
-            : " hover:text-white drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] hover:border-pokeBorder text-pokeBody border-pokeBody border-2"
-        }`}
+            ? "bg-gray-300 hover:border-white cursor-not-allowed drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-35 border-gray-300 border-2"
+            : " hover:text-white drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] hover:border-white text-pokeBody border-pokeBody border-2"
+          }`}
           onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
           disabled={currentPage === 1}
         >
@@ -127,8 +127,8 @@ export default function AllPokemonList() {
         <button
           className={`px-4 py-2 rounded ${
             currentPage === totalPages
-              ? "bg-gray-300 cursor-not-allowed drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-35 border-gray-300 border-2"
-              : " hover:text-white drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] hover:border-pokeBorder text-pokeBody border-pokeBody border-2"
+              ? "bg-gray-300 hover:border-white cursor-not-allowed drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-35 border-gray-300 border-2"
+              : " hover:text-white drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] hover:border-white text-pokeBody border-pokeBody border-2"
           }`}
           onClick={() =>
             setPage((prevPage) => Math.min(prevPage + 1, totalPages))

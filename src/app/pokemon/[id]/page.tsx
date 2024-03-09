@@ -70,7 +70,7 @@ export default function PokemonDetailPage({
         <div className="h-fit md:hidden block w-full">
           <HorizontalNavBar />
         </div>
-        <div className="md:w-4/5 h-[100dvh] pokemonListBg">
+        <div className="md:w-4/5 w-full h-[100dvh] pokemonListBg">
           <PokemonDetails pokemon={pokemon!} />
         </div>
       </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const VerticalNavBar = () => {
   return (
-    <div className="w-full h-[100dvh] border-r-2 bg-pokeNavBG border-pokeBorder border-opacity-90 text-center">
+    <div className="w-full h-[100dvh] border-r-2 bg-pokeboxBG border-pokeBorder border-opacity-90 text-center">
       <div className="flex flex-col gap-4 px-10 py-10 border-pokeBorder border-opacity-90">
         <Link href="/">
           <button>
@@ -22,7 +22,7 @@ const VerticalNavBar = () => {
       </div>
       <div className="px-10 flex flex-col gap-4">
         <h3 className="font-bold text-pokeBody drop-shadow-[0.5px_2px_0px_rgba(0,0,0,0,0.9)]">
-          Categories
+          Navigation
         </h3>
         <Link href="/liked-pokemon">
           <button className="hover:text-pokeBorder bg-cardBG hover:border-pokeBorder drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody border-pokeBody border-2 px-2 text-sm py-2 rounded-lg w-full">

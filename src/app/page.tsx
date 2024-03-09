@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import VerticalNavBar from "./components/VerticalNavBar";
-import GetComponent from "./components/maincomponents/pokemonlistscomponent";
+import AllPokemonList from "./components/AllPokemonList";
 import HorizontalNavBar from "./components/HorizontalNavBar";
 
 export const metadata: Metadata = {
@@ -18,8 +18,8 @@ const page = () => {
       <div className="h-fit md:hidden block">
         <HorizontalNavBar />
       </div>
-      <div className="bg-pokedexBG md:h-full h-[90%] p-10 md:w-4/5 overflow-y-scroll">
-        <GetComponent />
+      <div className="pokemonListBg md:h-full h-[90%] p-10 md:w-4/5 overflow-y-scroll">
+        <AllPokemonList />
       </div>
     </div>
   );

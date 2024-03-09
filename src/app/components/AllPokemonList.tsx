@@ -3,26 +3,10 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Link from "next/link";
 import Image from "next/image";
-
-// Define a type for the Pokemon data
-type Pokemon = {
-  id: number;
-  name: string;
-  url: string;
-  types: { type: { name: string } }[];
-  sprites: {
-    front_default: string;
-  };
-};
-
-type PokemonListResponse = {
-  pokemonList: any[]; // Replace 'any' with a more specific type if possible
-  currentPage: number;
-  totalPages: number;
-};
+import { Pokemon } from '../interfaces/Pokemon';
+import { PokemonListResponse } from '../interfaces/PokemonListResponse';
 
 async function getPokemonList(page: number, limit: number) {
-  // Fetch the list of Pokémon with pagination
   const res = await fetch(
     `https://pokeapi.co/api/v2/pokemon?offset=${
       (page - 1) * limit
@@ -35,7 +19,6 @@ async function getPokemonList(page: number, limit: number) {
 
   const listResult = await res.json();
 
-  // Fetch additional details for each Pokémon to get the sprites
   const pokemonDetails = await Promise.all(
     listResult.results.map(async (pokemon: { name: string; url: string }) => {
       const pokemonRes = await fetch(pokemon.url);
@@ -48,7 +31,6 @@ async function getPokemonList(page: number, limit: number) {
     })
   );
 
-  // Return the list with additional details including sprites
   return {
     pokemonList: pokemonDetails,
     currentPage: page,
@@ -56,7 +38,7 @@ async function getPokemonList(page: number, limit: number) {
   };
 }
 
-export default function GetComponent() {
+export default function AllPokemonList() {
   const [page, setPage] = React.useState(1);
   const limit = 18;
 
@@ -69,14 +51,21 @@ export default function GetComponent() {
   );
 
   if (isLoading) {
-    <div className="bg-pokedexBG h-[100dvh] flex justify-center items-center py-20r">
-      Loading pokemon data...
-    </div>;
+    return (
+      <div className="bg-pokedexBG h-[100dvh] flex justify-center items-center py-20">
+        <div className="text-pokeBody text-2xl">Loading pokemon data...</div>
+      </div>
+    );
   }
 
   if (isError) {
-    return <div>Error fetching Pokemon list.</div>;
+    return (
+      <div className="bg-pokedexBG h-[100dvh] flex justify-center items-center py-20">
+        <div className="text-pokeBody text-2xl">Error fetching Pokemon list.</div>
+      </div>
+    );
   }
+
 
   const { pokemonList, currentPage, totalPages } = data ?? {
     pokemonList: [],
@@ -95,12 +84,12 @@ export default function GetComponent() {
         {pokemonList.map((pokemon: Pokemon) => (
           <li
             key={pokemon.id}
-            className="bg-cardBG flex justify-center items-center hover:bg-opacity-95 rounded-xl p-4 border-pokeBorder border-2"
+            className=" flex justify-center items-center hover:bg-opacity-95 rounded-xl p-4 "
           >
             <Link legacyBehavior href={`/pokemon/${pokemon.id}`}>
               <a className="text-pokeBody font-bold text-xl transition-none text-center items-center justify-center flex flex-col gap-2 hover:text-poketitleBG capitalize">
                 <Image
-                  src={pokemon.sprites.front_default}
+                  src={pokemon.sprites.front_default || 'unable to load pokemon'}
                   alt={pokemon.name}
                   width={100}
                   height={100}
@@ -124,9 +113,9 @@ export default function GetComponent() {
         <button
           className={`px-4 py-2 rounded ${
             currentPage === 1
-              ? "bg-gray-300 cursor-not-allowed border-gray-300 border-2"
-              : " hover:text-white hover:border-white text-pokeBody border-pokeBody border-2"
-          }`}
+            ? "bg-gray-300 cursor-not-allowed drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-35 border-gray-300 border-2"
+            : " hover:text-white drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] hover:border-pokeBorder text-pokeBody border-pokeBody border-2"
+        }`}
           onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
           disabled={currentPage === 1}
         >
@@ -138,8 +127,8 @@ export default function GetComponent() {
         <button
           className={`px-4 py-2 rounded ${
             currentPage === totalPages
-              ? "bg-gray-300 cursor-not-allowed border-gray-300 border-2"
-              : " hover:text-white hover:border-white text-pokeBody border-pokeBody border-2"
+              ? "bg-gray-300 cursor-not-allowed drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] text-pokeBody text-opacity-35 border-gray-300 border-2"
+              : " hover:text-white drop-shadow-[0_1.2px_0px_rgba(0,255,0,0.5)] hover:border-pokeBorder text-pokeBody border-pokeBody border-2"
           }`}
           onClick={() =>
             setPage((prevPage) => Math.min(prevPage + 1, totalPages))

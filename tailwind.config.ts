@@ -20,9 +20,10 @@ const config: Config = {
         pokeBorder: "#CAC1C2",
         pokeTitle: "#DCE8E6",
         pokeNavBG: "#F0EDE5",
-        pokedexBG: "#E3DCC1",
-        pokeBG: "#99A64D",
+        pokeboxBG: "#F8E0D0",
         cardBG: "#F8F8F7",
+        pcBoxSecondary: "#9090A8",
+        pcBoxPrimary: "#707078"
       },
     },
   },
